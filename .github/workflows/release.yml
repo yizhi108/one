@@ -24,7 +24,7 @@ jobs:
         shell: bash
         run: |
           echo "using version tag ${GITHUB_REF:10}"
-          echo ::set-output name=version::"${GITHUB_REF:10}"
+          echo version="${GITHUB_REF:10}">> $GITHUB_OUTPUT
 
       # 根据查询到的版本号创建 release
       - name: Create Release
@@ -83,7 +83,7 @@ jobs:
       # 获取 yarn 缓存路径
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+        run: echo "dir=$(yarn config get cacheFolder)">> $GITHUB_OUTPUT
 
       # 使用 yarn 缓存
       - name: Yarn cache
